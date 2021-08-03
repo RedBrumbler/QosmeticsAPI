@@ -106,7 +106,6 @@ namespace Qosmetics
             COLOR multiplier;
             int length;
             float whiteStep;
-            #error oh no there was an error for some reason
     };
 }
 
