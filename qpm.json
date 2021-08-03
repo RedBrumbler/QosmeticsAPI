@@ -2,22 +2,22 @@
   "sharedDir": "shared",
   "dependenciesDir": "extern",
   "info": {
-    "name": "qosmetics-api",
+    "name": "QosmeticsAPI",
     "id": "qosmetics-api",
-    "version": "1.0.0",
-    "url": null,
+    "version": "0.1.0",
+    "url": "https://github.com/RedBrumbler/QosmeticsAPI",
     "additionalData": {
-      "headerOnly": true
+      "headersOnly": true
     }
   },
   "dependencies": [
     {
-      "id": "codegen",
+      "id": "conditional-dependencies",
       "versionRange": "*",
       "additionalData": {}
     },
     {
-      "id": "conditional-dependencies",
+      "id": "beatsaber-hook",
       "versionRange": "*",
       "additionalData": {}
     }

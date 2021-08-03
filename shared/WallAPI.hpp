@@ -1,9 +1,19 @@
 #pragma once
 
 #include "conditional-dependencies/shared/main.hpp"
+
+#ifdef HAS_CODEGEN
 #include "UnityEngine/GameObject.hpp"
 #include "UnityEngine/Material.hpp"
 #include "UnityEngine/Mesh.hpp"
+#else
+#warning typedeffing unity classes as Il2CppObject so the header will work, this is ugly and you should honestly use codegen
+namespace UnityEngine {
+    typedef Il2CppObject GameObject;
+    typedef Il2CppObject Material;
+    typedef Il2CppObject Mesh;
+}
+#endif
 
 #include <optional>
 #include <functional>

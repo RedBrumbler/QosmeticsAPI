@@ -46,7 +46,7 @@ LOCAL_SRC_FILES += $(call rwildcard,extern/beatsaber-hook/src/inline-hook,*.c)
 LOCAL_SHARED_LIBRARIES += modloader
 LOCAL_SHARED_LIBRARIES += beatsaber-hook_2_2_4
 LOCAL_SHARED_LIBRARIES += codegen_0_12_5
-LOCAL_LDLIBS += -llog -lz
-LOCAL_CFLAGS += -DID='"Qosmetics-API"' -DVERSION='"1.0.0"' -I'./shared' -I'./extern' -Wno-inaccessible-base -O2
+LOCAL_LDLIBS += -llog
+LOCAL_CFLAGS += -DID='"Qosmetics-API"' -DVERSION='"0.1.0"' -I'./shared' -I'./extern' -Wno-inaccessible-base
 LOCAL_C_INCLUDES += ./include ./src ./extern ./extern/codegen/include ./extern/libil2cpp/il2cpp/libil2cpp ./shared
 include $(BUILD_SHARED_LIBRARY)

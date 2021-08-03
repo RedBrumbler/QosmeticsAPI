@@ -2,29 +2,54 @@
 
 #include "conditional-dependencies/shared/main.hpp"
 #include "beatsaber-hook/shared/utils/typedefs.h"
-#include "UnityEngine/MonoBehaviour.hpp"
+
+#ifdef COLOR 
+#error COLOR macro defined, undefine it before including ColorComponent.hpp!
+#endif
+
+#ifdef HAS_CODEGEN
+    #include "UnityEngine/MonoBehaviour.hpp"
+#endif
 
 #if defined __has_include && __has_include("sombrero/shared/ColorUtils.hpp")
-#include "sombrero/shared/ColorUtils.hpp"
-#define SOMBRERO
+    #include "sombrero/shared/ColorUtils.hpp"
+    #define SOMBRERO
+    #define COLOR Sombrero::FastColor
 #else
-#include "UnityEngine/Color.hpp"
+    #ifdef HAS_CODEGEN
+        #include "UnityEngine/Color.hpp"
+        #define COLOR UnityEngine::Color
+    #else
+        #ifndef QOS_COLOR
+        #define QOS_COLOR
+        #warning defining qosmetics color type, this is not recommended to be used, but can be used. Use codegen or Sombrero instead
+        struct Color {
+            float r;
+            float g;
+            float b;
+            float a;
+        };
+        DEFINE_IL2CPP_ARG_TYPE(Color, "UnityEngine", "Color");
+        #endif
+        #define COLOR Color
+    #endif
 #endif
 
 #if defined __has_include && __has_include ("AltTrail.hpp")
 #include "AltTrail.hpp"
 #endif
 
-#ifdef SOMBRERO
-#define COLOR Sombrero::FastColor
-#else
-#define COLOR UnityEngine::Color
-#endif
-
 namespace Qosmetics
 {
+    #ifdef HAS_CODEGEN
     class TrailHelper : public UnityEngine::MonoBehaviour
     {
+    #else
+    #warning no codegen detected, class will fallback to manual definition
+    class TrailHelper : public Il2CppObject
+    {
+        void* m_CachedPtr;
+    #endif
         public:
             #if defined __has_include && __has_include ("AltTrail.hpp")
             Qosmetics::AltTrail* trailInstance;
@@ -108,5 +133,6 @@ namespace Qosmetics
             float whiteStep;
     };
 }
-
+#undef COLOR
+#undef SOMBRERO
 DEFINE_IL2CPP_ARG_TYPE(Qosmetics::TrailHelper*, "Qosmetics", "TrailHelper");

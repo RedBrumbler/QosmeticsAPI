@@ -2,35 +2,58 @@
 
 #include "conditional-dependencies/shared/main.hpp"
 #include "beatsaber-hook/shared/utils/typedefs.h"
-#include "UnityEngine/MonoBehaviour.hpp"
+
+#ifdef COLOR 
+    #error COLOR macro defined, undefine it before including ColorComponent.hpp!
+#endif
+
+#ifdef HAS_CODEGEN
+    #include "UnityEngine/MonoBehaviour.hpp"
+#endif
 
 #if defined __has_include && __has_include("sombrero/shared/ColorUtils.hpp")
-#include "sombrero/shared/ColorUtils.hpp"
-#define SOMBRERO
+    #include "sombrero/shared/ColorUtils.hpp"
+    #define COLOR Sombrero::FastColor
 #else
-#include "UnityEngine/Color.hpp"
+    #ifdef HAS_CODEGEN
+        #include "UnityEngine/Color.hpp"
+        #define COLOR UnityEngine::Color
+    #else
+        #ifndef QOS_COLOR
+        #define QOS_COLOR
+        #warning defining qosmetics color type, this is not recommended to be used, but can be used. Use codegen or Sombrero instead
+        struct Color {
+            float r;
+            float g;
+            float b;
+            float a;
+        };
+        DEFINE_IL2CPP_ARG_TYPE(Color, "UnityEngine", "Color");
+        #endif
+        #define COLOR Color
+    #endif
 #endif
 
 #ifndef qosm_id
-#define qosm_id "questcosmetics"
+    #define qosm_id "questcosmetics"
 #endif
 
 namespace Qosmetics
 {
+    #ifdef HAS_CODEGEN
     class ColorComponent : public UnityEngine::MonoBehaviour
     {
+    #else
+    #warning no codegen detected, class will fallback to manual definition
+    class ColorComponent : public Il2CppObject
+    {
+        void* m_CachedPtr;
+    #endif
         public:
-            #ifdef SOMBRERO
-            /// @brief give a left and right fastcolor to use for this object
-            void SetColors(const Sombrero::FastColor& leftColor, const Sombrero::FastColor& rightColor)
-            {
-                static auto function = CondDeps::FindUnsafe<void, Il2CppObject*, Sombrero::FastColor, Sombrero::FastColor>(qosm_id, "ColorComponent_SetColors");
-            #else
             /// @brief give a left and right color to use for this object
-            void SetColors(const UnityEngine::Color& leftColor, const UnityEngine::Color& rightColor)
+            void SetColors(const COLOR& leftColor, const COLOR& rightColor)
             {
-                static auto function = CondDeps::FindUnsafe<void, Il2CppObject*, UnityEngine::Color, UnityEngine::Color>(qosm_id, "ColorComponent_SetColors");
-            #endif
+                static auto function = CondDeps::FindUnsafe<void, Il2CppObject*, COLOR, COLOR>(qosm_id, "ColorComponent_SetColors");
                 if (!function) return;
 
                 function.value()(this, leftColor, rightColor);
@@ -56,4 +79,5 @@ namespace Qosmetics
     };
 }
 #undef qosm_id
+#undef COLOR
 DEFINE_IL2CPP_ARG_TYPE(Qosmetics::ColorComponent*, "Qosmetics", "ColorComponent");

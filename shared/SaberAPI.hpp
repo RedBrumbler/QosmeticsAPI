@@ -1,10 +1,19 @@
 #pragma once
 
 #include "conditional-dependencies/shared/main.hpp"
-#include "UnityEngine/GameObject.hpp"
-#include "UnityEngine/Transform.hpp"
 #include <optional>
 #include <functional>
+
+#ifdef HAS_CODEGEN
+#include "UnityEngine/GameObject.hpp"
+#include "UnityEngine/Transform.hpp"
+#else
+#warning typedeffing unity classes as Il2CppObject so the header will work, this is ugly and you should honestly use codegen
+namespace UnityEngine {
+    typedef Il2CppObject GameObject;
+    typedef Il2CppObject Transform;
+}
+#endif
 
 #ifndef qosm_id
 #define qosm_id "questcosmetics"

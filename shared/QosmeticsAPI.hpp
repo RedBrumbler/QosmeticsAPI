@@ -32,3 +32,4 @@ namespace Qosmetic
         }
     };
 }
+#undef qosm_id
