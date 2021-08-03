@@ -1,0 +1,6 @@
+obj/
+libs/
+extern/
+qpm.shared.json
+*.txt
+.vscode/

@@ -1,0 +1,26 @@
+{
+  "sharedDir": "shared",
+  "dependenciesDir": "extern",
+  "info": {
+    "name": "qosmetics-api",
+    "id": "qosmetics-api",
+    "version": "1.0.0",
+    "url": null,
+    "additionalData": {
+      "headerOnly": true
+    }
+  },
+  "dependencies": [
+    {
+      "id": "codegen",
+      "versionRange": "*",
+      "additionalData": {}
+    },
+    {
+      "id": "conditional-dependencies",
+      "versionRange": "*",
+      "additionalData": {}
+    }
+  ],
+  "additionalData": {}
+}
