@@ -31,12 +31,6 @@ LOCAL_MODULE := beatsaber-hook_2_2_4
 LOCAL_EXPORT_C_INCLUDES := extern/beatsaber-hook
 LOCAL_SRC_FILES := extern/libbeatsaber-hook_2_2_4.so
 include $(PREBUILT_SHARED_LIBRARY)
-# Creating prebuilt for dependency: codegen - version: 0.12.5
-include $(CLEAR_VARS)
-LOCAL_MODULE := codegen_0_12_5
-LOCAL_EXPORT_C_INCLUDES := extern/codegen
-LOCAL_SRC_FILES := extern/libcodegen_0_12_5.so
-include $(PREBUILT_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
 LOCAL_MODULE := qosmetics-api
@@ -45,7 +39,6 @@ LOCAL_SRC_FILES += $(call rwildcard,extern/beatsaber-hook/src/inline-hook,*.cpp)
 LOCAL_SRC_FILES += $(call rwildcard,extern/beatsaber-hook/src/inline-hook,*.c)
 LOCAL_SHARED_LIBRARIES += modloader
 LOCAL_SHARED_LIBRARIES += beatsaber-hook_2_2_4
-LOCAL_SHARED_LIBRARIES += codegen_0_12_5
 LOCAL_LDLIBS += -llog
 LOCAL_CFLAGS += -DID='"Qosmetics-API"' -DVERSION='"0.1.0"' -I'./shared' -I'./extern' -Wno-inaccessible-base
 LOCAL_C_INCLUDES += ./include ./src ./extern ./extern/codegen/include ./extern/libil2cpp/il2cpp/libil2cpp ./shared
