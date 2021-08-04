@@ -33,10 +33,7 @@
         #define COLOR Color
     #endif
 #endif
-
-#if defined __has_include && __has_include ("AltTrail.hpp")
 #include "AltTrail.hpp"
-#endif
 
 namespace Qosmetics
 {
@@ -50,12 +47,7 @@ namespace Qosmetics
         void* m_CachedPtr;
     #endif
         public:
-            #if defined __has_include && __has_include ("AltTrail.hpp")
             Qosmetics::AltTrail* trailInstance;
-            #else
-            // Qosmetics::AltTrail*
-            Il2CppObject* trailInstance;
-            #endif
             // Qosmetics::ColorManager*
             Il2CppObject* colorManager;
             // GlobalNamespace::SaberModelController*
