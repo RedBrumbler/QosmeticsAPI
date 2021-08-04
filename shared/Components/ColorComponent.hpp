@@ -53,7 +53,7 @@ namespace Qosmetics
             /// @brief give a left and right color to use for this object
             void SetColors(const COLOR& leftColor, const COLOR& rightColor)
             {
-                static auto function = CondDeps::FindUnsafe<void, Il2CppObject*, COLOR, COLOR>(qosm_id, "ColorComponent_SetColors");
+                static auto function = CondDeps::FindUnsafe<void, ColorComponent*, COLOR, COLOR>(qosm_id, "ColorComponent_SetColors");
                 if (!function) return;
 
                 function.value()(this, leftColor, rightColor);
@@ -62,7 +62,7 @@ namespace Qosmetics
             /// @brief call this to let qosmetics handle the colors itself
             void UpdateColors()
             {
-                static auto function = CondDeps::FindUnsafe<void, Il2CppObject*>(qosm_id, "ColorComponent_UpdateColors");
+                static auto function = CondDeps::FindUnsafe<void, ColorComponent*>(qosm_id, "ColorComponent_UpdateColors");
                 if (!function) return;
 
                 function.value()(this);

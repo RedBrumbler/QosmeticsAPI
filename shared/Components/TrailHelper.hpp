@@ -13,7 +13,6 @@
 
 #if defined __has_include && __has_include("sombrero/shared/ColorUtils.hpp")
     #include "sombrero/shared/ColorUtils.hpp"
-    #define SOMBRERO
     #define COLOR Sombrero::FastColor
 #else
     #ifdef HAS_CODEGEN
@@ -64,7 +63,7 @@ namespace Qosmetics
             
             void GetOrAddTrail(bool remake)
             {
-                static auto function = CondDeps::FindUnsafe<void, Il2CppObject*, bool>("questcosmetics", "TrailHelper_GetOrAddTrail");
+                static auto function = CondDeps::FindUnsafe<void, TrailHelper*, bool>("questcosmetics", "TrailHelper_GetOrAddTrail");
                 if (!function) return;
 
                 function.value()(this, remake);
@@ -72,7 +71,7 @@ namespace Qosmetics
 
             void Init(Il2CppObject* colorManager, Il2CppObject* saberModelController)
             {
-                static auto function = CondDeps::FindUnsafe<void, Il2CppObject*, Il2CppObject*, Il2CppObject*>("questcosmetics", "TrailHelper_Init");
+                static auto function = CondDeps::FindUnsafe<void, TrailHelper*, Il2CppObject*, Il2CppObject*>("questcosmetics", "TrailHelper_Init");
                 if (!function) return;
 
                 function.value()(this, colorManager, saberModelController);
@@ -80,7 +79,7 @@ namespace Qosmetics
 
             void TrailSetup()
             {
-                static auto function = CondDeps::FindUnsafe<void, Il2CppObject*>("questcosmetics", "TrailHelper_TrailSetup");
+                static auto function = CondDeps::FindUnsafe<void, TrailHelper*>("questcosmetics", "TrailHelper_TrailSetup");
                 if (!function) return;
 
                 function.value()(this);
@@ -88,7 +87,7 @@ namespace Qosmetics
 
             void SetTrailActive(bool active)
             {
-                static auto function = CondDeps::FindUnsafe<void, Il2CppObject*, bool>("questcosmetics", "TrailHelper_SetTrailActive");
+                static auto function = CondDeps::FindUnsafe<void, TrailHelper*, bool>("questcosmetics", "TrailHelper_SetTrailActive");
                 if (!function) return;
 
                 function.value()(this, active);
@@ -96,7 +95,7 @@ namespace Qosmetics
 
             void UpdateColors()
             {
-                static auto function = CondDeps::FindUnsafe<void, Il2CppObject*>("questcosmetics", "TrailHelper_UpdateColors");
+                static auto function = CondDeps::FindUnsafe<void, TrailHelper*>("questcosmetics", "TrailHelper_UpdateColors");
                 if (!function) return;
 
                 function.value()(this);
@@ -104,14 +103,10 @@ namespace Qosmetics
 
             COLOR GetColor(int colorType)
             {
-                static auto function = CondDeps::FindUnsafe<void, Il2CppObject*, int, COLOR&>("questcosmetics", "TrailHelper_GetColor");
+                static auto function = CondDeps::FindUnsafe<void, TrailHelper*, int, COLOR&>("questcosmetics", "TrailHelper_GetColor");
                 if (!function) 
                 {
-                    #ifdef SOMBRERO
-                    return Sombrero::FastColor::white();
-                    #else
                     return {1.0f, 1.0f, 1.0f, 1.0f};
-                    #endif
                 }
                 COLOR out;
                 function.value()(this, colorType, out);
@@ -120,7 +115,7 @@ namespace Qosmetics
 
             void SetColors(const COLOR& leftColor, const COLOR& rightColor)
             {
-                static auto function = CondDeps::FindUnsafe<void, Il2CppObject*, const COLOR&, const COLOR&>("questcosmetics", "TrailHelper_SetColors");
+                static auto function = CondDeps::FindUnsafe<void, TrailHelper*, const COLOR&, const COLOR&>("questcosmetics", "TrailHelper_SetColors");
                 if (!function) return;
                 
                 function.value()(this, leftColor, rightColor);
@@ -134,5 +129,4 @@ namespace Qosmetics
     };
 }
 #undef COLOR
-#undef SOMBRERO
 DEFINE_IL2CPP_ARG_TYPE(Qosmetics::TrailHelper*, "Qosmetics", "TrailHelper");
