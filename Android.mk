@@ -33,7 +33,7 @@ LOCAL_SRC_FILES := extern/libbeatsaber-hook_2_2_4.so
 include $(PREBUILT_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
-LOCAL_MODULE := qosmetics-api
+LOCAL_MODULE := qosmetics-api_0_1_0
 LOCAL_SRC_FILES += $(call rwildcard,src/**,*.cpp)
 LOCAL_SRC_FILES += $(call rwildcard,extern/beatsaber-hook/src/inline-hook,*.cpp)
 LOCAL_SRC_FILES += $(call rwildcard,extern/beatsaber-hook/src/inline-hook,*.c)
