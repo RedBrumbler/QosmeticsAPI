@@ -9,6 +9,10 @@
     #include "UnityEngine/Material.hpp"
 #endif
 
+#ifdef COLOR_DEFINE 
+#error COLOR_DEFINE macro defined, undefine it before including ColorComponent.hpp!
+#endif
+
 #if defined __has_include && __has_include("sombrero/shared/ColorUtils.hpp")
     #include "sombrero/shared/ColorUtils.hpp"
     #define COLOR_DEFINE Sombrero::FastColor

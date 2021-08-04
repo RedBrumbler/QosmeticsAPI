@@ -2,6 +2,7 @@
 
 #include "conditional-dependencies/shared/main.hpp"
 #include "beatsaber-hook/shared/utils/typedefs.h"
+#include "AltTrail.hpp"
 
 #ifdef COLOR_DEFINE 
 #error COLOR_DEFINE macro defined, undefine it before including ColorComponent.hpp!
@@ -33,7 +34,6 @@
         #define COLOR_DEFINE Color
     #endif
 #endif
-#include "AltTrail.hpp"
 
 namespace Qosmetics
 {
