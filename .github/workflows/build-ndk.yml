@@ -163,4 +163,24 @@ jobs:
         cd ${GITHUB_WORKSPACE}
         pwsh -Command ./build.ps1
 
+    - name: Add Codegen
+      run: |
+        ./QPM/QPM dependency add codegen
+        ./QPM/QPM restore
+    
+    - name: Build
+      run: |
+        cd ${GITHUB_WORKSPACE}
+        pwsh -Command ./build.ps1
+
+    - name: Add Sombrero
+      run: |
+        ./QPM/QPM dependency add sombrero
+        ./QPM/QPM restore
+    
+    - name: Build
+      run: |
+        cd ${GITHUB_WORKSPACE}
+        pwsh -Command ./build.ps1
+    
     # TODO: Add auto-populating releases, auto update versions, auto publish package on release
