@@ -11,11 +11,11 @@
 
 #if defined __has_include && __has_include("sombrero/shared/ColorUtils.hpp")
     #include "sombrero/shared/ColorUtils.hpp"
-    #define COLOR Sombrero::FastColor
+    #define COLOR_DEFINE Sombrero::FastColor
 #else
     #ifdef HAS_CODEGEN
         #include "UnityEngine/Color.hpp"
-        #define COLOR UnityEngine::Color
+        #define COLOR_DEFINE UnityEngine::Color
     #else
         #ifndef QOS_COLOR
         #define QOS_COLOR
@@ -28,7 +28,7 @@
         };
         DEFINE_IL2CPP_ARG_TYPE(Color, "UnityEngine", "Color");
         #endif
-        #define COLOR Color
+        #define COLOR_DEFINE Color
     #endif
 #endif
 
@@ -63,12 +63,12 @@ namespace Qosmetics
             int Granularity;
             float WhiteStep;
 
-            COLOR MyColor;
+            COLOR_DEFINE MyColor;
 
         private:
             // dont even try accessing them lol, they're not in the order they appear here and they are mostly things that you shouldn't mess with anyways
             uint8_t privateMembers[sizeof(int) * 6 + sizeof(void*) * 3 + sizeof(std::vector<void*>) + sizeof(float) + sizeof(bool)];
     };
 }
-#undef COLOR
+#undef COLOR_DEFINE
 DEFINE_IL2CPP_ARG_TYPE(Qosmetics::AltTrail*, "Qosmetics", "AltTrail");

@@ -3,8 +3,8 @@
 #include "conditional-dependencies/shared/main.hpp"
 #include "beatsaber-hook/shared/utils/typedefs.h"
 
-#ifdef COLOR 
-    #error COLOR macro defined, undefine it before including ColorComponent.hpp!
+#ifdef COLOR_DEFINE 
+    #error COLOR_DEFINE macro defined, undefine it before including ColorComponent.hpp!
 #endif
 
 #ifdef HAS_CODEGEN
@@ -13,11 +13,11 @@
 
 #if defined __has_include && __has_include("sombrero/shared/ColorUtils.hpp")
     #include "sombrero/shared/ColorUtils.hpp"
-    #define COLOR Sombrero::FastColor
+    #define COLOR_DEFINE Sombrero::FastColor
 #else
     #ifdef HAS_CODEGEN
         #include "UnityEngine/Color.hpp"
-        #define COLOR UnityEngine::Color
+        #define COLOR_DEFINE UnityEngine::Color
     #else
         #ifndef QOS_COLOR
         #define QOS_COLOR
@@ -30,7 +30,7 @@
         };
         DEFINE_IL2CPP_ARG_TYPE(Color, "UnityEngine", "Color");
         #endif
-        #define COLOR Color
+        #define COLOR_DEFINE Color
     #endif
 #endif
 
@@ -51,9 +51,9 @@ namespace Qosmetics
     #endif
         public:
             /// @brief give a left and right color to use for this object
-            void SetColors(const COLOR& leftColor, const COLOR& rightColor)
+            void SetColors(const COLOR_DEFINE& leftColor, const COLOR_DEFINE& rightColor)
             {
-                static auto function = CondDeps::FindUnsafe<void, ColorComponent*, COLOR, COLOR>(qosm_id, "ColorComponent_SetColors");
+                static auto function = CondDeps::FindUnsafe<void, ColorComponent*, COLOR_DEFINE, COLOR_DEFINE>(qosm_id, "ColorComponent_SetColors");
                 if (!function) return;
 
                 function.value()(this, leftColor, rightColor);
@@ -79,5 +79,5 @@ namespace Qosmetics
     };
 }
 #undef qosm_id
-#undef COLOR
+#undef COLOR_DEFINE
 DEFINE_IL2CPP_ARG_TYPE(Qosmetics::ColorComponent*, "Qosmetics", "ColorComponent");
