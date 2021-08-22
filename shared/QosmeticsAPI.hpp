@@ -8,10 +8,11 @@
 #define qosm_id "questcosmetics"
 #endif
 
-namespace Qosmetic
+namespace Qosmetics
 {
     class API
     {
+        public:
         /// @brief Gets if Qosmetics even exists
         /// @return true for yes false for no
         static bool GetExists() noexcept
