@@ -90,12 +90,12 @@ namespace Qosmetics
             {
                 return type != invalid;
             }
-            
+
         private:
             std::string author = "---";
             std::string name = "";
             std::string description = "";
             std::string filePath = "";
             ItemType type = invalid;
-    }
+    };
 }
