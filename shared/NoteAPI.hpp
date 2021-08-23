@@ -16,6 +16,8 @@ namespace UnityEngine {
 #include <optional>
 #include <functional>
 
+#include "SharedTypes.hpp"
+
 #ifndef qosm_id
 #define qosm_id "questcosmetics"
 #endif
@@ -128,6 +130,15 @@ namespace Qosmetics
                 std::string result = "";
                 function.value()(result);
                 return std::make_optional(result);
+            }
+
+            /// @brief gets active note descriptor, allowing you to get some more info about the note
+            /// @return optional descriptor, nullopt for not found, valid for found
+            static std::optional<Descriptor> GetActiveNoteDescriptor()
+            {
+                static auto function = CondDeps::FindUnsafe<Descriptor>(qosm_id, "GetActiveNoteDescriptor");
+                if (!function) return std::nullopt;
+                else return function.value()();
             }
     };
 }

@@ -15,6 +15,8 @@ namespace UnityEngine {
 }
 #endif
 
+#include "SharedTypes.hpp"
+
 #include <optional>
 #include <functional>
 
@@ -123,6 +125,15 @@ namespace Qosmetics
                 std::string result = "";
                 function.value()(result);
                 return std::make_optional(result);
+            }
+
+            /// @brief gets active wall descriptor, allowing you to get some more info about the wall
+            /// @return optional descriptor, nullopt for not found, valid for found
+            static std::optional<Descriptor> GetActiveWallDescriptor()
+            {
+                static auto function = CondDeps::FindUnsafe<Descriptor>(qosm_id, "GetActiveWallDescriptor");
+                if (!function) return std::nullopt;
+                else return function.value()();
             }
     };
 }

@@ -9,10 +9,7 @@
 using namespace Qosmetics;
 int main ()
 {
-    // this at least makes it so nothing gets stripped
-    TrailHelper* ptr = new TrailHelper();
-    ColorComponent* ptr2 = new ColorComponent();
-    AltTrail* ptr3 = new AltTrail();
+    
 
     return 0;
 }

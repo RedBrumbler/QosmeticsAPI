@@ -15,6 +15,8 @@ namespace UnityEngine {
 }
 #endif
 
+#include "SharedTypes.hpp"
+
 #ifndef qosm_id
 #define qosm_id "questcosmetics"
 #endif
@@ -108,7 +110,13 @@ namespace Qosmetics
                 return std::make_optional(result);
             }
 
-            /// @brief sets the specific passed trail active
-            static void SetTrailActive(Il2CppObject*);
+            /// @brief gets active saber descriptor, allowing you to get some more info about the saber
+            /// @return optional descriptor, nullopt for not found, valid for found
+            static std::optional<Descriptor> GetActiveSaberDescriptor()
+            {
+                static auto function = CondDeps::FindUnsafe<Descriptor>(qosm_id, "GetActiveSaberDescriptor");
+                if (!function) return std::nullopt;
+                else return function.value()();
+            }
     };
 }
