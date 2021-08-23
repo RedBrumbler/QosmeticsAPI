@@ -35,12 +35,12 @@ namespace Qosmetics
 
             /// @brief gets you the qosmetics config
             /// @return optional const ref config, nullopt for not found, const ref for found
-            static std::optional<std::cref<Config>> GetConfig()
+            static std::optional<std::reference_wrapper<const Config>> GetConfig()
             {
                 static auto function = CondDeps::FindUnsafe<Config*>(qosm_id, "GetConfig");
                 if (!function) return std::nullopt;
                 const Config& config = *function.value()();
-                else return std::cref(config);
+                return std::make_optional(std::cref(config));
             }
     };
 }
