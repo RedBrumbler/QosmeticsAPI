@@ -135,5 +135,32 @@ namespace Qosmetics
                 if (!function) return std::nullopt;
                 else return function.value()();
             }
+
+            /// @brief gets whether or not walls are forcibly disabled by some mod
+            /// @return optional bool, true for disabled, false for not disabled, nullopt for not installed
+            static std::optional<bool> GetWallsDisabled()
+            {
+                static auto function = CondDeps::FindUnsafe<bool>(qosm_id, "GetWallsDisabled");
+                if (!function) return std::nullopt;
+                else return function.value()();
+            }
+
+            /// @brief registers a mod as disabling walls, making Qosmetics do nothing with notes
+            /// @param info the modinfo to pass to the disabling function
+            static void RegisterWallDisablingInfo(ModInfo info)
+            {
+                static auto function = CondDeps::FindUnsafe<void, ModInfo>(qosm_id, "RegisterWallDisablingInfo");
+                if (!function) return;
+                else function.value()(info);
+            }
+
+            /// @brief unregisters a mod as disabling walls, allowing qosmetics, provided no other mods also disable 
+            /// @param info the modinfo to pass to the disabling function
+            static void UnregisterWallDisablingInfo(ModInfo info)
+            {
+                static auto function = CondDeps::FindUnsafe<void, ModInfo>(qosm_id, "UnregisterWallDisablingInfo");
+                if (!function) return;
+                else function.value()(info);
+            }
     };
 }

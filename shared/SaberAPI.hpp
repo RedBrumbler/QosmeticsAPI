@@ -118,5 +118,32 @@ namespace Qosmetics
                 if (!function) return std::nullopt;
                 else return function.value()();
             }
+
+            /// @brief gets whether or not sabers are forcibly disabled by some mod
+            /// @return optional bool, true for disabled, false for not disabled, nullopt for not installed
+            static std::optional<bool> GetSabersDisabled()
+            {
+                static auto function = CondDeps::FindUnsafe<bool>(qosm_id, "GetSabersDisabled");
+                if (!function) return std::nullopt;
+                else return function.value()();
+            }
+
+            /// @brief registers a mod as disabling sabers, making Qosmetics do nothing with notes
+            /// @param info the modinfo to pass to the disabling function
+            static void RegisterSaberDisablingInfo(ModInfo info)
+            {
+                static auto function = CondDeps::FindUnsafe<void, ModInfo>(qosm_id, "RegisterSaberDisablingInfo");
+                if (!function) return;
+                else function.value()(info);
+            }
+
+            /// @brief unregisters a mod as disabling sabers, allowing qosmetics, provided no other mods also disable 
+            /// @param info the modinfo to pass to the disabling function
+            static void UnregisterSaberDisablingInfo(ModInfo info)
+            {
+                static auto function = CondDeps::FindUnsafe<void, ModInfo>(qosm_id, "UnregisterSaberDisablingInfo");
+                if (!function) return;
+                else function.value()(info);
+            }
     };
 }

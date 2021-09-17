@@ -1,6 +1,7 @@
 #pragma once
 
 #include "conditional-dependencies/shared/main.hpp"
+#include "modloader/shared/modloader.hpp"
 
 #ifdef HAS_CODEGEN
 #include "UnityEngine/GameObject.hpp"
@@ -139,6 +140,33 @@ namespace Qosmetics
                 static auto function = CondDeps::FindUnsafe<Descriptor>(qosm_id, "GetActiveNoteDescriptor");
                 if (!function) return std::nullopt;
                 else return function.value()();
+            }
+
+            /// @brief gets whether or not notes are forcibly disabled by some mod
+            /// @return optional bool, true for disabled, false for not disabled, nullopt for not installed
+            static std::optional<bool> GetNotesDisabled()
+            {
+                static auto function = CondDeps::FindUnsafe<bool>(qosm_id, "GetNotesDisabled");
+                if (!function) return std::nullopt;
+                else return function.value()();
+            }
+
+            /// @brief registers a mod as disabling notes, making Qosmetics do nothing with notes
+            /// @param info the modinfo to pass to the disabling function
+            static void RegisterNoteDisablingInfo(ModInfo info)
+            {
+                static auto function = CondDeps::FindUnsafe<void, ModInfo>(qosm_id, "RegisterNoteDisablingInfo");
+                if (!function) return;
+                else function.value()(info);
+            }
+
+            /// @brief unregisters a mod as disabling notes, allowing qosmetics, provided no other mods also disable 
+            /// @param info the modinfo to pass to the disabling function
+            static void UnregisterNoteDisablingInfo(ModInfo info)
+            {
+                static auto function = CondDeps::FindUnsafe<void, ModInfo>(qosm_id, "UnregisterNoteDisablingInfo");
+                if (!function) return;
+                else function.value()(info);
             }
     };
 }
